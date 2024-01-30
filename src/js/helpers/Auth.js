@@ -42,4 +42,42 @@ export class AuthHelpers {
 			})
 		})
 	}
+
+	async login(host, method, identifier, message, signature) {
+		const loginUri = `${host}/operad-ai/api/v1/login?method=${method}&identifier=${identifier}&message=${message}signature=${signature}`
+		const loginMethod = 'GET'
+		const loginHeaders = {
+			'Accept': 'application/json'
+		}
+		const loginResponseType = null
+		let loginResponse
+
+		try {
+			loginResponse = await this.commonHelpers.rest(loginUri, loginMethod,
+				loginHeaders, loginResponseType)
+
+			if(loginResponse.status > 299) {
+				return new Promise((resolve, reject) => {
+					reject({
+						error: loginResponse,
+						result: null
+					})
+				})
+			}
+		} catch (error) {
+			return new Promise((resolve, reject) => {
+				reject({
+					error: error,
+					result: null
+				})
+			})
+		}
+
+		return new Promise((resolve, reject) => {
+			resolve({
+				error: null,
+				result: authenticateResponse
+			})
+		})
+	}
 }

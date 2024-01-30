@@ -21,6 +21,7 @@
   "author": "Momcilo Dzunic (momcilo@dzunic.net)",
   "license": "MIT",
   "dependencies": {
+    "@metamask/eth-sig-util": "^7.0.1",
     "axios": "^1.6.7",
     "web3": "^4.4.0"
   }
