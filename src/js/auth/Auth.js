@@ -2,8 +2,6 @@ import { CommonHelpers } from '../helpers/Common.js'
 import { AuthHelpers } from '../helpers/Auth.js'
 import { Identity } from '../identity/Identity.js'
 import { signTypedData, SignTypedDataVersion } from '@metamask/eth-sig-util'
-import { CommonHelpers } from "../helpers/Common.js";
-import { AuthHelpers } from "../helpers/Auth.js";
 
 export class Auth {
     commonHelpers = null
@@ -11,7 +9,7 @@ export class Auth {
 	authType = null
 	identifier = null
 	identity = null
-	apiHost = (process.env.NODE_ENV == 'production') ? `${process.env.API_PROD_ENDPOINT}` : `${process.env.API_PROD_ENDPOINT}`
+	apiHost = (process.env.NODE_ENV == 'production') ? `${process.env.API_PROD_ENDPOINT}` : `${process.env.API_DEV_ENDPOINT}`
 	apiToken = null
 	ethereumChainId = 1
 	verifyingMessageSignatureContractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"getChainId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getContractAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"geteip712DomainHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"signer","type":"address"},{"internalType":"string","name":"message","type":"string"}],"name":"gethashStruct","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"signer","type":"address"},{"internalType":"string","name":"message","type":"string"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"verifySignature","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}]
@@ -48,7 +46,7 @@ export class Auth {
 				error: null
 			})
 		})
-}
+	}
 
 	async authenticate(signature) {
 		const getIdentifierResponse = await this.getIdentifier()
@@ -92,7 +90,7 @@ export class Auth {
 					error: getIdentifierResponse.error
 				})
 			})
-		this.identifier = getIdentifierResponse.result		
+		this.identifier = getIdentifierResponse.result
 	
 		const web3 = getIdentifierResponse.web3
 		let chainId = Number(await web3.eth.getChainId())
@@ -277,12 +275,12 @@ export class Auth {
 					error: getIdentifierResponse.error
 				})
 			})
-		this.identifier = getIdentifierResponse.result		
+		this.identifier = getIdentifierResponse.result
 
 		let signature
 		const message = `Login request made on ${(new Date()).toISOString()}`
 		try {
-			signature = (await this.signMessage(message)).result
+			signature = (await this.signMessage(message)).result.signature
 		} catch (error) {
 			return new Promise((resolve, reject) => {
 				reject({
