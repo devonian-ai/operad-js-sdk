@@ -1,7 +1,12 @@
 import { CommonHelpers } from '../helpers/Common.js'
 import { AuthHelpers } from '../helpers/Auth.js'
 import { Identity } from '../identity/Identity.js'
+<<<<<<< HEAD
 import { signTypedData, SignTypedDataVersion } from '@metamask/eth-sig-util'
+=======
+import { CommonHelpers } from "../helpers/Common.js";
+import { AuthHelpers } from "../helpers/Auth.js";
+>>>>>>> d5f3469656c5f7163018663ad813aed21577890c
 
 export class Auth {
     commonHelpers = null
