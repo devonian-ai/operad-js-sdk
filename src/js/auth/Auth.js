@@ -1,4 +1,6 @@
 import { Identity } from '../identity/Identity.js'
+import { CommonHelpers } from "../helpers/Common.js";
+import { AuthHelpers } from "../helpers/Auth.js";
 
 export class Auth {
     commonHelpers = null
