@@ -168,6 +168,7 @@ export class Auth {
 					verifyingContract: that.verifyingMessageSignatureContractAddress,
 					chainId: chainId,
 					message: message,
+					typedData: btoa(JSON.stringify(msgParams)),
 					signature: signatureResponse,
 					r: r,
 					s: s,
@@ -266,7 +267,7 @@ export class Auth {
 		}
 	}
 
-	async login() {
+	async login(signType) {
 		const getIdentifierResponse = await this.getIdentifier()
 		if(getIdentifierResponse.error != null)
 			return new Promise((resolve, reject) => {
@@ -277,10 +278,10 @@ export class Auth {
 			})
 		this.identifier = getIdentifierResponse.result
 
-		let signature
+		let signatureResponse
 		const message = `Login request made on ${(new Date()).toISOString()}`
 		try {
-			signature = (await this.signMessage(message)).result.signature
+			signatureResponse = (await this.signMessage(message))
 		} catch (error) {
 			return new Promise((resolve, reject) => {
 				reject({
@@ -292,7 +293,8 @@ export class Auth {
 
 		let result
 		try {
-			result = (await this.authHelpers.login(this.apiHost, "ecdsa", this.identifier, message, signature)).result
+			result = (await this.authHelpers.login(this.apiHost, signType, this.identifier,
+				signatureResponse.result.typedData, signatureResponse.result.signature)).result
 		} catch (error) {
 			return new Promise((resolve, reject) => {
 				reject({

@@ -44,17 +44,24 @@ export class AuthHelpers {
 	}
 
 	async login(host, method, identifier, message, signature) {
-		const loginUri = `${host}/operad-ai/api/v1/login?method=${method}&identifier=${identifier}&message=${message}signature=${signature}`
-		const loginMethod = 'GET'
+		const loginUri = `${host}/operad-ai/api/v1/login`
+		const loginData = {
+			"method": method,
+			"identifier": identifier,
+			"message": message,
+			"signature": signature
+		}
+		const loginMethod = 'POST'
 		const loginHeaders = {
-			'Accept': 'application/json'
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
 		}
 		const loginResponseType = null
-		let loginResponse
 
+		let loginResponse
 		try {
 			loginResponse = await this.commonHelpers.rest(loginUri, loginMethod,
-				loginHeaders, loginResponseType)
+				loginHeaders, loginResponseType, loginData)
 
 			if(loginResponse.status > 299) {
 				return new Promise((resolve, reject) => {
@@ -76,7 +83,7 @@ export class AuthHelpers {
 		return new Promise((resolve, reject) => {
 			resolve({
 				error: null,
-				result: authenticateResponse
+				result: loginResponse
 			})
 		})
 	}
