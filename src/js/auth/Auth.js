@@ -278,17 +278,37 @@ export class Auth {
 			})
 		this.identifier = getIdentifierResponse.result
 
-		let signatureResponse
-		const message = `Login request made on ${(new Date()).toISOString()}`
-		try {
-			signatureResponse = (await this.signMessage(message))
-		} catch (error) {
-			return new Promise((resolve, reject) => {
-				reject({
-					error: error,
-					result: null
+		let signatureResponse = {}
+
+		switch (signType) {
+			case "eth_signTypedData_v4":
+				const message = `Login request made on ${(new Date()).toISOString()}`
+				try {
+					signatureResponse = (await this.signMessage(message))
+				} catch (error) {
+					return new Promise((resolve, reject) => {
+						reject({
+							error: error,
+							result: null
+						})
+					})
+				}
+				break
+			case "email":
+				signatureResponse.error = null
+				signatureResponse.result = {
+					typedData: null,
+					signature: null
+				}
+				break
+			default:
+				return new Promise((resolve, reject) => {
+					reject({
+						error: `Unknown signature type ${signType}`,
+						result: null
+					})
 				})
-			})
+				break
 		}
 
 		let result
