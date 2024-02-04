@@ -40,3 +40,5 @@
 **/*.ntvs*
 **/*.njsproj
 **/*.sln
+
+build
