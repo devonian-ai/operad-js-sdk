@@ -3,11 +3,13 @@ import { Auth } from './auth/Auth.js'
 import { Storage } from './storage/Storage.js'
 import { Compute } from './compute/Compute.js'
 import { Trust } from './trust/Trust.js'
+import { Profile } from './profile/Profile.js'
 
 export {
     Identity,
     Auth,
     Storage,
     Compute,
-    Trust
+    Trust,
+    Profile,
 }
