@@ -1,11 +1,11 @@
 {
   "name": "@operad-ai/js-sdk",
-  "version": "0.0.3",
+  "version": "0.0.9",
   "description": "JS SDK for Operad.ai",
   "main": "src/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pack": "cd build && npm pack .."
+    "pack": "mkdir -p build && cd build && npm pack .."
   },
   "type": "module",
   "repository": {
@@ -22,8 +22,11 @@
   "author": "Momcilo Dzunic (momcilo@dzunic.net)",
   "license": "MIT",
   "dependencies": {
-    "@metamask/eth-sig-util": "^7.0.1",
-    "axios": "^1.6.7",
-    "web3": "^4.4.0"
+    "@libp2p/websockets": "^6.0.3",
+    "@metamask/eth-sig-util": "^5.1.0",
+    "axios": "^1.4.0",
+    "filereader": "^0.10.3",
+    "web3": "^4.0.1",
+    "ws": "^8.13.0"
   }
 }
