@@ -8,11 +8,17 @@ export class StorageHelpers {
         const blockSize = this.blockSize
         host = host.replace('http', 'ws')
         host = host.replace('https', 'wss')
-        let ws = new WebSocket(host, {
-            headers: {
-                "Connection": "upgrade",
-                "Upgrade": "websocket"
-            }})
+        let ws = new WebSocket(host);
+        // Notes:
+        // - Copied from co2.storage 
+        // - Commented out as it throws error:
+        //      "Failed to construct 'WebSocket': The subprotocol '[object Object]' is invalid." 
+        // let ws = new WebSocket(host, {
+        //     headers: {
+        //         "Connection": "upgrade",
+        //         "Upgrade": "websocket"
+        //     }
+        // })
 
         let filePos = 0
         let reader = new FileReader()
@@ -94,5 +100,17 @@ export class StorageHelpers {
             ws = null
             return false
         }
+    }
+
+    // Read a slice using FileReader
+    readBlob(file, reader, filePos, blockSize) {
+        let first = filePos
+        let last = first + blockSize
+        if (last > file.size) {
+            last == file.size
+        }
+        let blob = file.slice(first, last)
+        reader.readAsArrayBuffer(blob)
+        return blob
     }
 }

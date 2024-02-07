@@ -1,6 +1,6 @@
 {
   "name": "@operad-ai/js-sdk",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "JS SDK for Operad.ai",
   "main": "src/js/index.js",
   "scripts": {
