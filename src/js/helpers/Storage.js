@@ -1,8 +1,8 @@
 export class StorageHelpers {
 
-//	blockSize = 1048576
     blockSize = 524288
 
+    // Copied from co2-storage, Mihailo couldn't make it work, see Notes below
     async upload(file, host, callback) {
         const that = this
         const blockSize = this.blockSize
@@ -112,5 +112,20 @@ export class StorageHelpers {
         let blob = file.slice(first, last)
         reader.readAsArrayBuffer(blob)
         return blob
+    }
+
+    async basicWebsocketsUpload(file, host) {
+        host = host.replace('http', 'ws')
+        host = host.replace('https', 'wss')
+        const ws = new WebSocket(host);
+
+        ws.onopen = () => {
+            // Slice file into chunks and send each chunk
+            const chunkSize = 1024; // Choose an appropriate size
+            for (let i = 0; i < file.size; i += chunkSize) {
+                const chunk = file.slice(i, i + chunkSize);
+                ws.send(chunk);
+            }
+        };
     }
 }

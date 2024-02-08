@@ -50,10 +50,10 @@ export class ProfileHelpers {
             if(response.status > 299) {
                 return this.commonHelpers.newErrorPromise(response)
             }
+
+            return this.commonHelpers.newPromise(response)
         } catch (error) {
             return this.commonHelpers.newErrorPromise(error)
         }
-
-        return this.commonHelpers.newPromise(error)
     }
 }
