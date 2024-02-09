@@ -8,13 +8,17 @@ export class CommonHelpers {
     constructor() {
     }
 
-	rest(uri, method, headers, responseType, data) {
+	rest(uri, method, headers, responseType, data, credentials) {
+		let h = {}
+		if(headers)
+			Object.assign(h, headers)
 		return axios({
 			url: uri,
 			method: method,
-			headers: headers,
+			headers: h,
 			responseType: responseType,
 			data: (data != undefined) ? data : null,
+			withCredentials : (credentials == true) ? true : false
 		})
 	}
 

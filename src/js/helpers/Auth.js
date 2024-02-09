@@ -16,7 +16,7 @@ export class AuthHelpers {
 
 		try {
 			authenticateResponse = await this.commonHelpers.rest(authenticateUri, authenticateMethod,
-				authenticateHeaders, authenticateResponseType)
+				authenticateHeaders, authenticateResponseType, null, true)
 
 			if(authenticateResponse.status > 299) {
 				return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ export class AuthHelpers {
 		let loginResponse
 		try {
 			loginResponse = await this.commonHelpers.rest(loginUri, loginMethod,
-				loginHeaders, loginResponseType, loginData)
+				loginHeaders, loginResponseType, loginData, true)
 
 			if(loginResponse.status > 299) {
 				return new Promise((resolve, reject) => {

@@ -20,7 +20,7 @@ export class ProfileHelpers {
 
         try {
             response = await this.commonHelpers.rest(uri, method,
-                headers, responseType)
+                headers, responseType, null, true)
 
             if(response.status > 299) {
                 return this.commonHelpers.newErrorPromise(response)
@@ -45,7 +45,7 @@ export class ProfileHelpers {
 
         try {
             response = await this.commonHelpers.rest(uri, method,
-                headers, responseType, payload)
+                headers, responseType, payload, true)
 
             if(response.status > 299) {
                 return this.commonHelpers.newErrorPromise(response)
