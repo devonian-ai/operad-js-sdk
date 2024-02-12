@@ -16,4 +16,11 @@ export class Storage {
 
 		return await this.storageHelpers.upload(file, `${host}/operad-ai/api/v1/upload?signature=${signature}`, callback)
 	}
+
+	async download(path, signature, callback) {
+		signature = signature || ''
+		const host = this.commonHelpers.getApiHost()
+
+		return await this.storageHelpers.download(`${host}/operad-ai/api/v1/download?signature=${signature}&path=${path}`, callback)
+	}
 }
