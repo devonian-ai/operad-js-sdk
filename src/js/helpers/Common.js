@@ -5,7 +5,7 @@ export class CommonHelpers {
 		? process.env.API_PROD_ENDPOINT
 		: process.env.API_DEV_ENDPOINT
 
-    constructor() {
+	constructor() {
     }
 
 	rest(uri, method, headers, responseType, data, credentials) {

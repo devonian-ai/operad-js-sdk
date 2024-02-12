@@ -14,13 +14,6 @@ export class Storage {
 		signature = signature || ''
 		const host = this.commonHelpers.getApiHost()
 
-		return this.storageHelpers.upload(file, `${host}/operad-ai/api/v1/upload?signature=${signature}`, callback)
-	}
-
-	async basicWebsocketsUpload(file, signature) {
-		signature = signature || ''
-		const host = this.commonHelpers.getApiHost()
-
-		return this.storageHelpers.basicWebsocketsUpload(file, `${host}/operad-ai/api/v1/basic-websocket-upload?signature=${signature}`)
+		return await this.storageHelpers.upload(file, `${host}/operad-ai/api/v1/upload?signature=${signature}`, callback)
 	}
 }
