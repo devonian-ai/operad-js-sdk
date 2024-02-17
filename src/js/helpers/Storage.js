@@ -1,5 +1,10 @@
+import { CommonHelpers } from './Common.js'
+
 export class StorageHelpers {
-    blockSize = 524288
+    constructor() {
+		this.commonHelpers = new CommonHelpers()
+		this.blockSize = 524288
+    }
 
 	// Web socket upload, browser, filereader
 	async upload(file, host, callback) {
@@ -105,5 +110,43 @@ export class StorageHelpers {
 		let blob = file.slice(first, last)
 		reader.readAsArrayBuffer(blob)
 		return blob
+	}
+
+	async download(host, path, signature) {
+		const downloadUri = `${host}/operad-ai/api/v1/download?signature=${signature}&path=${path}`
+		const downloadMethod = 'GET'
+		const downloadHeaders = {
+			'Accept': 'application/octet-stream'
+		}
+		const downloadResponseType = 'blob'
+		let downloadResponse
+
+		try {
+			downloadResponse = await this.commonHelpers.rest(downloadUri, downloadMethod,
+				downloadHeaders, downloadResponseType, null, true)
+
+			if(downloadResponse.status > 299) {
+				return new Promise((resolve, reject) => {
+					reject({
+						error: downloadResponse,
+						result: null
+					})
+				})
+			}
+		} catch (error) {
+			return new Promise((resolve, reject) => {
+				reject({
+					error: error,
+					result: null
+				})
+			})
+		}
+
+		return new Promise((resolve, reject) => {
+			resolve({
+				error: null,
+				result: downloadResponse
+			})
+		})
 	}
 }
