@@ -10,11 +10,14 @@ export class Storage {
 		this.storageHelpers = new StorageHelpers()
 	}
 
-	async upload(file, signature, callback) {
+	async upload(file, name, description, priv, signature, callback) {
+		name = name || ''
+		description = description || ''
+		priv = priv || 'false'
 		signature = signature || ''
 		const host = this.commonHelpers.getApiHost()
 
-		return await this.storageHelpers.upload(file, `${host}/operad-ai/api/v1/upload?signature=${signature}`, callback)
+		return await this.storageHelpers.upload(file, `${host}/operad-ai/api/v1/upload?signature=${signature}&name=${name}&description=${description}&private=${priv}`, callback)
 	}
 
 	async download(path, signature) {
