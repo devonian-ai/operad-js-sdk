@@ -26,4 +26,18 @@ export class Storage {
 
 		return await this.storageHelpers.download(host, path, signature)
 	}
+
+	/**
+	 * Get asset
+	 */
+	async getAsset(cid, headers = {}) {
+		return this.storageHelpers.getAsset(cid, headers)
+	}
+
+	/**
+	 * Add asset
+	 */
+	async addAsset(payload, headers = {}) {
+		return this.storageHelpers.addAsset(payload, headers)
+	}
 }
