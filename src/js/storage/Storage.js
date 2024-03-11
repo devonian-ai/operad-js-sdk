@@ -40,18 +40,4 @@ export class Storage {
 	async addAsset(payload, headers = {}) {
 		return this.storageHelpers.addAsset(payload, headers)
 	}
-
-	/**
-	 * Get type
-	 */
-	async getType(cid, headers = {}) {
-		return this.storageHelpers.getType(cid, headers)
-	}
-
-	/**
-	 * Add type
-	 */
-	async addType(payload, headers = {}) {
-		return this.storageHelpers.addType(payload, headers)
-	}
 }
