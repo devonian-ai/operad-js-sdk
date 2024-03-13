@@ -55,9 +55,10 @@ export class TypeHelpers {
         }
     }
 
-    async getTypes(headers = {}) {
+    async getTypes(search = '', headers = {}) {
 		const host = this.commonHelpers.getApiHost()
-		const uri = `${host}/operad-ai/api/v1/types`
+		search = search || ''
+		const uri = `${host}/operad-ai/api/v1/types?search=${search}`
 		const method = 'GET'
 		headers = {
 			...headers,

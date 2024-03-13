@@ -25,9 +25,9 @@ export class Type {
 	}
 
 	/**
-	 * Get type
+	 * Get types
 	 */
-	async getTypes(headers = {}) {
-		return this.typeHelpers.getTypes(headers)
+	async getTypes(search = '', headers = {}) {
+		return this.typeHelpers.getTypes(search, headers)
 	}
 }
