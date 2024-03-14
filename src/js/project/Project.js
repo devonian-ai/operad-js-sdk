@@ -13,4 +13,11 @@ export class Project {
 	async addProject(payload, headers = {}) {
 		return this.projectHelper.addProject(payload, headers)
 	}
+
+	/**
+	 * Get project details
+	 */
+	async getProject(cid, headers = {}) {
+		return this.projectHelper.getProject(cid, headers)
+	}
 }
