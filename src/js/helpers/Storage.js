@@ -177,8 +177,7 @@ export class StorageHelpers {
 
     async addAsset(payload, headers = {}) {
         const host = this.commonHelpers.getApiHost()
-        const uri = (Object.prototype.toString.call(payload.payload) === '[object String]') ?
-			`${host}/operad-ai/api/v1/payload` : `${host}/operad-ai/api/v1/asset`
+        const uri = `${host}/operad-ai/api/v1/asset`
         const method = 'POST'
         headers = {
             ...headers,
