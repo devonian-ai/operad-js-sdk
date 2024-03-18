@@ -5,6 +5,7 @@ import { Compute } from './compute/Compute.js'
 import { Trust } from './trust/Trust.js'
 import { Profile } from './profile/Profile.js'
 import { Type } from './type/Type.js'
+import { Project } from './project/Project.js'
 
 export {
     Identity,
@@ -13,5 +14,6 @@ export {
     Compute,
     Trust,
     Profile,
+    Project,
     Type,
 }

@@ -20,4 +20,11 @@ export class Project {
 	async getProject(cid, headers = {}) {
 		return this.projectHelper.getProject(cid, headers)
 	}
+
+	/**
+	 * Get all projects
+	 */
+	async getProjects(search='', headers = {}) {
+		return this.projectHelper.getProjects(search, headers)
+	}
 }

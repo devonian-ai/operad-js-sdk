@@ -1,8 +1,6 @@
 import { CommonHelpers } from './Common.js'
 
 export class ProjectHelpers {
-    commonHelpers = null
-
     constructor() {
         this.commonHelpers = new CommonHelpers()
     }
@@ -55,5 +53,31 @@ export class ProjectHelpers {
         }
 
         return this.commonHelpers.newPromise(response)
+    }
+
+    async getProjects(search='', headers = {}) {
+        const host = this.commonHelpers.getApiHost()
+        search = search || ''
+        const uri = `${host}/operad-ai/api/v1/projects?search=${search}`
+        const method = 'GET'
+        headers = {
+            ...headers,
+            'Accept': 'application/json',
+        }
+        const responseType = null
+        let response
+
+        try {
+            response = await this.commonHelpers.rest(uri, method,
+                headers, responseType, null, true)
+
+            if(response.status > 299) {
+                return this.commonHelpers.newErrorPromise(response)
+            }
+
+            return this.commonHelpers.newPromise(response)
+        } catch (error) {
+            return this.commonHelpers.newErrorPromise(error)
+        }
     }
 }
