@@ -27,4 +27,11 @@ export class Project {
 	async getProjects(search='', headers = {}) {
 		return this.projectHelper.getProjects(search, headers)
 	}
+
+	/**
+	 * Update project
+	 */
+	async updateProject(cid, payload, headers = {}) {
+		return this.projectHelper.updateProject(cid, payload, headers)
+	}
 }
