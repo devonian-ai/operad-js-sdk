@@ -6,6 +6,7 @@ import { Trust } from './trust/Trust.js'
 import { Profile } from './profile/Profile.js'
 import { Type } from './type/Type.js'
 import { Project } from './project/Project.js'
+import { Transformation } from './transformation/Transformation.js'
 
 export {
     Identity,
@@ -16,4 +17,5 @@ export {
     Profile,
     Project,
     Type,
+    Transformation,
 }
